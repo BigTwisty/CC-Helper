@@ -59,7 +59,9 @@ namespace CC_Helper
             //Call the imported function with the cursor's current position
             int X = Cursor.Position.X;
             int Y = Cursor.Position.Y;
-            mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+            mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 0, 0);
+            Thread.Sleep(50);
+            mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
         }
 
         private bool FocusProcess(string procName)
@@ -103,10 +105,7 @@ namespace CC_Helper
         {
             this.Directories.Nodes.Clear();
             var rootDirectoryInfo = new DirectoryInfo(path);
-            foreach (var directory in rootDirectoryInfo.GetDirectories().Where(x => !x.Name.StartsWith(".")))
-            {
-                this.Directories.Nodes.Add(CreateDirectoryNode(directory));
-            }
+            this.Directories.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
         }
 
         private static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
@@ -119,6 +118,7 @@ namespace CC_Helper
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Text = string.Concat("CC-Helper   (v", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version,")");
             this.ExitOnCopy.Checked = Properties.Settings.Default.ExitOnCopy;
             this.Source.Text = Properties.Settings.Default.Source;
             this.Destination.Text = Properties.Settings.Default.Destination;
@@ -135,7 +135,8 @@ namespace CC_Helper
         private void Directories_AfterSelect(object sender, TreeViewEventArgs e)
         {
             this.Directories.PathSeparator = @"\";
-            this.LoadFiles(Path.Combine(this.Source.Text, this.Directories.SelectedNode.FullPath));
+            var source = new DirectoryInfo(this.Source.Text);
+            this.LoadFiles(Path.Combine(source.Parent.FullName, this.Directories.SelectedNode.FullPath));
         }
 
         private void LoadFiles(string path)
@@ -167,18 +168,18 @@ namespace CC_Helper
             File.WriteAllLines(this.dataPath, this.selectedFiles.ToArray());
         }
 
-        private void CopyDirectory(DirectoryInfo directoryInfo)
+        private void CopyDirectory(DirectoryInfo source)
         {
-            var datafile = Path.Combine(Path.GetFullPath(directoryInfo.FullName), "data.cch");
+            var datafile = Path.Combine(source.FullName, "data.cch");
             if (File.Exists(datafile))
             {
                 var list = File.ReadAllLines(datafile);
                 foreach (var file in list)
-                {
-                    var sourcePath = Path.GetFullPath(directoryInfo.FullName);
-                    var subPath = this.Source.Text.Length > sourcePath.Length ?
-                        sourcePath.Substring(this.Source.Text.Length + 1) : string.Empty;
-                    var sourceFile = Path.Combine(sourcePath, file);
+                {                    
+                    var sourceFile = Path.Combine(source.FullName, file);
+                    var subPath = source.FullName.Remove(0, this.Source.Text.Length);
+                    if (subPath.StartsWith(@"\"))
+                        subPath = subPath.Remove(0, 1);
                     var destPath = Path.Combine(this.destinationPath, subPath);
                     
                     var destFile = Path.Combine(destPath, Path.GetFileNameWithoutExtension(file));
@@ -190,7 +191,7 @@ namespace CC_Helper
                     File.WriteAllText(destFile, contents);
                 }
             }
-            foreach (var directory in directoryInfo.GetDirectories().Where(x => !x.Name.StartsWith(".")))
+            foreach (var directory in source.GetDirectories().Where(x => !x.Name.StartsWith(".")))
             {
                 CopyDirectory(directory);
             }
@@ -208,7 +209,7 @@ namespace CC_Helper
             if (this.Minecraft.Text != "" && this.FocusProcess(this.Minecraft.Text) && !string.IsNullOrEmpty(this.RunOnEntry.Text))
             {
                 // Sometimes Minecraft doesn't respond until a mouse_click event
-                Thread.Sleep(50);
+                Thread.Sleep(200);
                 this.DoMouseClick();
                 Thread.Sleep(50);
                 // SendKeys giving duplicate keystrokes
@@ -367,10 +368,25 @@ namespace CC_Helper
                 {
                     this.destinationPath = dir;
                     this.Copy.Enabled = true;
+                    this.Open.Enabled = true;
                     return;
                 }
             }
             this.Copy.Enabled = false;
+            this.Open.Enabled = false;
+        }
+
+        private void Open_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(this.destinationPath))
+            {
+                System.Diagnostics.Process.Start(this.destinationPath);
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

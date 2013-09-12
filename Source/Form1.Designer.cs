@@ -48,6 +48,7 @@
             this.Comps = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.Minecraft = new System.Windows.Forms.TextBox();
+            this.Open = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -64,13 +65,13 @@
             this.Source.Location = new System.Drawing.Point(116, 6);
             this.Source.Name = "Source";
             this.Source.ReadOnly = true;
-            this.Source.Size = new System.Drawing.Size(389, 20);
+            this.Source.Size = new System.Drawing.Size(318, 20);
             this.Source.TabIndex = 13;
             this.Source.Enter += new System.EventHandler(this.Source_Enter);
             // 
             // SourceBrowse
             // 
-            this.SourceBrowse.Location = new System.Drawing.Point(511, 7);
+            this.SourceBrowse.Location = new System.Drawing.Point(440, 7);
             this.SourceBrowse.Name = "SourceBrowse";
             this.SourceBrowse.Size = new System.Drawing.Size(33, 19);
             this.SourceBrowse.TabIndex = 10;
@@ -92,14 +93,14 @@
             this.Destination.Location = new System.Drawing.Point(116, 32);
             this.Destination.Name = "Destination";
             this.Destination.ReadOnly = true;
-            this.Destination.Size = new System.Drawing.Size(389, 20);
+            this.Destination.Size = new System.Drawing.Size(318, 20);
             this.Destination.TabIndex = 14;
             this.Destination.TextChanged += new System.EventHandler(this.Destination_TextChanged);
             this.Destination.Enter += new System.EventHandler(this.Destination_Enter);
             // 
             // DestinationBrowse
             // 
-            this.DestinationBrowse.Location = new System.Drawing.Point(511, 33);
+            this.DestinationBrowse.Location = new System.Drawing.Point(440, 32);
             this.DestinationBrowse.Name = "DestinationBrowse";
             this.DestinationBrowse.Size = new System.Drawing.Size(33, 19);
             this.DestinationBrowse.TabIndex = 12;
@@ -110,27 +111,27 @@
             // Files
             // 
             this.Files.FormattingEnabled = true;
-            this.Files.Location = new System.Drawing.Point(275, 85);
+            this.Files.Location = new System.Drawing.Point(231, 84);
             this.Files.Name = "Files";
-            this.Files.Size = new System.Drawing.Size(269, 199);
+            this.Files.Size = new System.Drawing.Size(242, 229);
             this.Files.TabIndex = 1;
             this.Files.SelectedIndexChanged += new System.EventHandler(this.Files_SelectedIndexChanged);
             // 
             // Directories
             // 
             this.Directories.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.Directories.Location = new System.Drawing.Point(5, 85);
+            this.Directories.Location = new System.Drawing.Point(5, 139);
             this.Directories.Name = "Directories";
-            this.Directories.Size = new System.Drawing.Size(263, 199);
+            this.Directories.Size = new System.Drawing.Size(220, 174);
             this.Directories.TabIndex = 0;
             this.Directories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Directories_AfterSelect);
             // 
             // Copy
             // 
             this.Copy.Enabled = false;
-            this.Copy.Location = new System.Drawing.Point(5, 351);
+            this.Copy.Location = new System.Drawing.Point(5, 343);
             this.Copy.Name = "Copy";
-            this.Copy.Size = new System.Drawing.Size(451, 42);
+            this.Copy.Size = new System.Drawing.Size(381, 42);
             this.Copy.TabIndex = 7;
             this.Copy.Text = "Copy";
             this.Copy.UseVisualStyleBackColor = true;
@@ -139,7 +140,7 @@
             // ExitOnCopy
             // 
             this.ExitOnCopy.AutoSize = true;
-            this.ExitOnCopy.Location = new System.Drawing.Point(336, 297);
+            this.ExitOnCopy.Location = new System.Drawing.Point(392, 320);
             this.ExitOnCopy.Name = "ExitOnCopy";
             this.ExitOnCopy.Size = new System.Drawing.Size(85, 17);
             this.ExitOnCopy.TabIndex = 4;
@@ -150,7 +151,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 327);
+            this.label4.Location = new System.Drawing.Point(5, 321);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 13);
             this.label4.TabIndex = 5;
@@ -158,16 +159,16 @@
             // 
             // RunOnEntry
             // 
-            this.RunOnEntry.Location = new System.Drawing.Point(83, 324);
+            this.RunOnEntry.Location = new System.Drawing.Point(83, 318);
             this.RunOnEntry.Name = "RunOnEntry";
-            this.RunOnEntry.Size = new System.Drawing.Size(460, 20);
+            this.RunOnEntry.Size = new System.Drawing.Size(303, 20);
             this.RunOnEntry.TabIndex = 6;
             this.RunOnEntry.TextChanged += new System.EventHandler(this.RunOnEntry_TextChanged);
             // 
             // Cancel
             // 
             this.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Cancel.Location = new System.Drawing.Point(462, 351);
+            this.Cancel.Location = new System.Drawing.Point(392, 343);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(81, 42);
             this.Cancel.TabIndex = 8;
@@ -180,9 +181,9 @@
             this.Worlds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Worlds.Enabled = false;
             this.Worlds.FormattingEnabled = true;
-            this.Worlds.Location = new System.Drawing.Point(116, 58);
+            this.Worlds.Location = new System.Drawing.Point(83, 58);
             this.Worlds.Name = "Worlds";
-            this.Worlds.Size = new System.Drawing.Size(121, 21);
+            this.Worlds.Size = new System.Drawing.Size(142, 21);
             this.Worlds.Sorted = true;
             this.Worlds.TabIndex = 15;
             this.Worlds.SelectedIndexChanged += new System.EventHandler(this.Worlds_SelectedIndexChanged);
@@ -190,7 +191,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(72, 61);
+            this.label5.Location = new System.Drawing.Point(39, 61);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 13);
             this.label5.TabIndex = 16;
@@ -199,7 +200,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(297, 61);
+            this.label6.Location = new System.Drawing.Point(8, 88);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 13);
             this.label6.TabIndex = 17;
@@ -210,28 +211,39 @@
             this.Comps.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Comps.Enabled = false;
             this.Comps.FormattingEnabled = true;
-            this.Comps.Location = new System.Drawing.Point(372, 58);
+            this.Comps.Location = new System.Drawing.Point(83, 85);
             this.Comps.Name = "Comps";
-            this.Comps.Size = new System.Drawing.Size(121, 21);
+            this.Comps.Size = new System.Drawing.Size(142, 21);
             this.Comps.TabIndex = 18;
             this.Comps.SelectedIndexChanged += new System.EventHandler(this.Comps_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 297);
+            this.label3.Location = new System.Drawing.Point(228, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(127, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "&Minecraft Window Name:";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // Minecraft
             // 
-            this.Minecraft.Location = new System.Drawing.Point(138, 294);
+            this.Minecraft.Location = new System.Drawing.Point(361, 58);
             this.Minecraft.Name = "Minecraft";
-            this.Minecraft.Size = new System.Drawing.Size(149, 20);
+            this.Minecraft.Size = new System.Drawing.Size(112, 20);
             this.Minecraft.TabIndex = 3;
             this.Minecraft.TextChanged += new System.EventHandler(this.Minecraft_TextChanged);
+            // 
+            // Open
+            // 
+            this.Open.Location = new System.Drawing.Point(5, 112);
+            this.Open.Name = "Open";
+            this.Open.Size = new System.Drawing.Size(220, 21);
+            this.Open.TabIndex = 19;
+            this.Open.Text = "Open In Explorer";
+            this.Open.UseVisualStyleBackColor = true;
+            this.Open.Click += new System.EventHandler(this.Open_Click);
             // 
             // Form1
             // 
@@ -239,7 +251,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.Cancel;
-            this.ClientSize = new System.Drawing.Size(550, 399);
+            this.ClientSize = new System.Drawing.Size(478, 390);
+            this.Controls.Add(this.Open);
             this.Controls.Add(this.Comps);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -291,6 +304,7 @@
         private System.Windows.Forms.ComboBox Comps;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox Minecraft;
+        private System.Windows.Forms.Button Open;
     }
 }
 
