@@ -103,9 +103,12 @@ namespace CC_Helper
 
         private void ListDirectory(string path)
         {
-            this.Directories.Nodes.Clear();
-            var rootDirectoryInfo = new DirectoryInfo(path);
-            this.Directories.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
+            if (Directory.Exists(path))
+            {
+                this.Directories.Nodes.Clear();
+                var rootDirectoryInfo = new DirectoryInfo(path);
+                this.Directories.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
+            }
         }
 
         private static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
@@ -122,7 +125,11 @@ namespace CC_Helper
             this.ExitOnCopy.Checked = Properties.Settings.Default.ExitOnCopy;
             this.Source.Text = Properties.Settings.Default.Source;
             this.Destination.Text = Properties.Settings.Default.Destination;
-            if (this.Source.Text.Length > 0) this.ListDirectory(this.Source.Text);
+            if (string.IsNullOrEmpty(this.Destination.Text))
+                this.Destination.Text = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    ".minecraft");
+            this.ListDirectory(this.Source.Text);
             this.Minecraft.Text = Properties.Settings.Default.Minecraft;
             this.RunOnEntry.Text = Properties.Settings.Default.RunOnEntry;
             var w = Properties.Settings.Default.World;
@@ -361,7 +368,7 @@ namespace CC_Helper
         private void UpdateCopy()
         {
             this.destinationPath = "";
-            if (this.Worlds.SelectedIndex >= 0 && this.Comps.SelectedIndex >= 0 && this.Comps.Enabled)
+            if (this.Worlds.SelectedIndex >= 0 && this.Comps.SelectedIndex >= 0 && this.Comps.Enabled && Directory.Exists(this.Source.Text))
             {
                 var dir = Path.Combine(this.Destination.Text, "saves", this.Worlds.SelectedItem.ToString(), "computer", this.Comps.SelectedValue.ToString());
                 if (!string.IsNullOrEmpty(this.Comps.SelectedItem.ToString()) && Directory.Exists(dir))

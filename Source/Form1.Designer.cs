@@ -237,6 +237,7 @@
             // 
             // Open
             // 
+            this.Open.Enabled = false;
             this.Open.Location = new System.Drawing.Point(5, 112);
             this.Open.Name = "Open";
             this.Open.Size = new System.Drawing.Size(220, 21);
